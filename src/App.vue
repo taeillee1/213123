@@ -7,11 +7,15 @@
 
   <div>
     <h1>{{logo}}</h1>
-    <input type="text" v-model="logo"/>
-    <p v-if="logo.length>9">너무길어요</p>
-    <button>검색</button>
+    <input id="a" type="text" v-model="logo"/>
+    <p v-if="logo.length > 9">너무길어요</p>
+    <button @click="setMain">검색</button>
     <button v-on:click="addItem">추가버튼</button>
     <button v-on:click="popItem">삭제버튼</button>
+  </div>
+
+  <div>
+    <textarea v-model="a"></textarea>
   </div>
   
   
@@ -25,10 +29,15 @@
   <div>
     <ul>
       <li v-for="(user,index) in users" :key="index" style="text-align : left">
-        이름은 {{user.name}}&emsp; 직업은 {{user.job}}&emsp; 성별은 {{user.gender}}
+        이름은 {{user.name}}&emsp; 직업은 {{user.job}}&emsp; 성별은 {{user.gender}}&emsp; 핸드폰 번호는 {{user.phone_number}}
       </li>
     </ul>
   </div>
+
+  <h2>
+    완료된 : {{ completedTo }}
+  </h2>
+
 
 </template>
 
@@ -39,16 +48,17 @@ export default {
 
   data(){ //데이터를 저장하는 곳
     return {
+      a: '입력',
       price1 : 60,
       logo : '원룸shop',
       스타일 : "color : red",
       메뉴들 : ['Home','Shop','About','Cart'],
       가격들 : ['70','90','30'],
-      products : ['역삼동 원룸', '천호동 원룸', '마포구 원룸'],
+      products : ['역삼동 원룸', '천호동 원룸', '마포구 원룸','아무원룸'],
       users: [
-        { name : 'scalper', job : 'backend-developer', gender: 'male' },
-        { name : 'john', job : 'designer', gender: 'female' },
-        { name : '철수', job : 'frontend-developer', gender: 'male' }
+        { name : 'scalper', job : 'backend-developer', gender: 'male', phone_number: '010-1234-1234' },
+        { name : 'john', job : 'Web-designer', gender: 'female', phone_number: '010-1111-1111' },
+        { name : '철수', job : 'frontend-developer', gender: 'male', phone_number: '010-4321-4321' }
       ]
     } 
   },
@@ -64,10 +74,18 @@ export default {
     },
     popItem(){
       this.products.pop()
+    },
+    setMain(){
+      this.a=this.logo
     }
   },
   components: {
     
+  },
+  computed: {
+    completedTo() {
+      return 0;
+    }
   }
 }
 </script>
