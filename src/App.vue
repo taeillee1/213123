@@ -22,10 +22,10 @@
   <div v-for="(product,i) in products" :key="i" class="sub">
     <h3>{{product}}</h3>
     <a>{{가격들[i]}}</a>&nbsp;
-    <button class="btn" type="button" @click="getData">{{i}}</button>
-    <button class="setbtn" type="button" @click="setData">{{i}}</button>
+    <button v-on:click="신고수[i]++">허위매물신고</button> <span>신고수 : {{신고수[i]}}</span>
+    <button @mouseover="increase(i)">마우스오버</button> <span>신고수 : {{신고수[i]}}</span>
   </div>
-
+ 
   <div>
     <ul>
       <li v-for="(user,index) in users" :key="index" style="text-align : left">
@@ -33,11 +33,6 @@
       </li>
     </ul>
   </div>
-
-  <h2>
-    완료된 : {{ completedTo }}
-  </h2>
-
 
 </template>
 
@@ -48,13 +43,14 @@ export default {
 
   data(){ //데이터를 저장하는 곳
     return {
+      신고수 : [0,0,0] ,
       a: '입력',
       price1 : 60,
       logo : '원룸shop',
       스타일 : "color : red",
       메뉴들 : ['Home','Shop','About','Cart'],
       가격들 : ['70','90','30'],
-      products : ['역삼동 원룸', '천호동 원룸', '마포구 원룸','아무원룸'],
+      products : ['역삼동 원룸', '천호동 원룸', '마포구 원룸'],
       users: [
         { name : 'scalper', job : 'backend-developer', gender: 'male', phone_number: '010-1234-1234' },
         { name : 'john', job : 'Web-designer', gender: 'female', phone_number: '010-1111-1111' },
@@ -77,6 +73,9 @@ export default {
     },
     setMain(){
       this.a=this.logo
+    },
+    increase(i){
+      this.신고수[i]++;
     }
   },
   components: {
